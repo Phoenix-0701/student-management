@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thông Tin Sinh Viên</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 40px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 300px;
+        padding: 8px;
+      }
+      .btn-save {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1
+      th:text="${sinhVien.id == null} ? 'Thêm Sinh Viên Mới' : 'Cập Nhật Sinh Viên'"
+    ></h1>
+
+    <form th:action="@{/students/save}" th:object="${sinhVien}" method="POST">
+      <div class="form-group">
+        <label>Mã Số Sinh Viên (ID):</label>
+        <input
+          type="text"
+          th:field="*{id}"
+          th:readonly="${sinhVien.id != null}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Họ và Tên:</label>
+        <input type="text" th:field="*{name}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Tuổi:</label>
+        <input type="number" th:field="*{age}" required />
+      </div>
+
+      <button type="submit" class="btn-save">Lưu Sản Phẩm</button>
+      <a th:href="@{/students}">Hủy bỏ</a>
+    </form>
+  </body>
+</html>
